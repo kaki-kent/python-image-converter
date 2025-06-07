@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_title }} - 処理結果</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .version {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .result-container {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        
+        .download-btn:hover {
+            background: #218838;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .size-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ app_title }}</h1>
+        <div class="version">(Ver {{ version }})</div>
+    </div>
+    
+    <div class="container">
+        <div class="result-container">
+            <h2>✅ 処理完了</h2>
+            <p><strong>{{ message }}</strong></p>
+            
+            <div class="size-info">
+                <h3>ファイル情報:</h3>
+                <p><strong>元ファイル名:</strong> {{ original_filename }}</p>
+                <p><strong>出力ファイル名:</strong> {{ output_filename }}</p>
+                {% if original_size and new_size %}
+                <p><strong>元のサイズ:</strong> {{ original_size[0] }} × {{ original_size[1] }}px</p>
+                <p><strong>リサイズ後:</strong> {{ new_size[0] }} × {{ new_size[1] }}px</p>
+                {% endif %}
+            </div>
+            
+            <a href="/download/{{ download_id }}" class="download-btn">📥 ダウンロード</a>
+            <a href="/" class="back-btn">🔄 新しい画像をリサイズ</a>
+        </div>
+    </div>
+</body>
+</html>
